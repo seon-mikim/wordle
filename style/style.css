@@ -1,0 +1,91 @@
+/* header */
+
+.header_area {
+    width: 100%;
+    height: 33px;
+    border-bottom: 1px solid #000;
+}
+
+.header_wrap {
+    width: 100%;
+    display: flex;
+    align-items: center;
+   justify-content: space-between;
+}
+
+.header_title {
+    padding-left: 50px;
+    text-align: center;
+    font-weight: 600;
+}
+.bamberg_area {
+    width: 22px;
+}
+
+.right_icon_wrap{
+    display: flex;
+   
+}
+
+img{
+    width: 22px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+
+/* main */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 80px;
+}
+
+.board-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.board_block{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #d3d6da;
+    width: 60px;
+    height: 60px;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    margin: 80px;
+}
+
+.key-row {
+     display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+
+
+.key-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #5d5e60;
+    font-size: 20px;
+    color: #fff;
+    font-weight: 600;
+    height: 58px;
+    padding:  0 10px;
+
+}
