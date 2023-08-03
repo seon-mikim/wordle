@@ -41,12 +41,34 @@ main {
   gap: 5px;
   margin-top: 80px;
 }
-
+@keyframes notMatchAnswer {
+  0%{transform: translateX(0px);}
+  50%{transform: translateX(-20px);}
+  75%{transform: translateX(0px);}
+  100%{transform: translateX(20px);}
+}
 .board-row {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 5px;
+
+}
+
+.board-row.row-0.not_match_answer{
+  animation: notMatchAnswer 0.3s ease;
+}
+.board-row.row-1.not_match_answer{
+  animation: notMatchAnswer 0.3s ease;
+}
+.board-row.row-2.not_match_answer{
+  animation: notMatchAnswer 0.3s ease;
+}
+.board-row.row-3.not_match_answer{
+  animation: notMatchAnswer 0.3s ease;
+}
+.board-row.row-4.not_match_answer{
+  animation: notMatchAnswer 0.3s ease;
 }
 
 .board_block {

@@ -7,20 +7,18 @@ let timer
 async function appStart() {
   const getAnswer = await getAnswerWord()
   const answerWord = getAnswer[0].toUpperCase()
-  console.log(answerWord)
 
   const handleNotMatchAnswerWord = (rowIndex) => {
-
-    const guessWordRow = document.querySelector(`.board-row .row-'${rowIndex}'`)
+    const guessWordRow = document.querySelector(`.board-row.row-${rowIndex}`)
     guessWordRow.classList.add('not_match_answer')
-    if(rowIndex !== attempts) guessWordRow.classList.remove('not_match_answer')
+    if(rowIndex !== attempts)  guessWordRow.classList.remove('not_match_answer')
   }
   /**종료시 모달창 나오는 함수 */
   const displayGameover = () => {
     const divCreateEl = document.createElement('div')
-    divCreateEl.innerText = '게임이 종료 되었습니다.'
+    divCreateEl.innerText = `두구두구 🤔 정답은 ${answerWord} 게임이 종료~.`
     divCreateEl.style =
-      'display:flex; justify-content:center; align-items:center; position:absolute; top: 35%; left: 45%; background-color: white; width: 200px; height: 150px;'
+      'display:flex; justify-content:center; align-items:center; position:absolute; top: 35%; left: 43%; background-color: white; width: 200px; height: 150px; padding: 0 20px;'
     document.body.appendChild(divCreateEl)
   }
   /**게임 종료 함수 */
@@ -31,7 +29,8 @@ async function appStart() {
   }
   /**엔터를 누를 시 다음 줄로 넘어가는 함수*/
   const nextLine = () => {
-    if (attempts === 6) return gameover()
+    console.log(attempts)
+    if (attempts ===4 ) return gameover()
     attempts += 1
     index = 0
   }
@@ -67,13 +66,14 @@ async function appStart() {
       block.style.color = 'white'
       keyBlock.style.color = 'white'
     }
+    if(hitNumber <5) handleNotMatchAnswerWord(attempts)
     if (hitNumber === 5) gameover()
     else nextLine()
-    if(hitNumber <4) return handleNotMatchAnswerWord(attempts)
       
   }
   /**키 누를 시 해당 조건에 맞는 동작하게 하는 함수 */
   const handleKeydown = (event) => {
+    console.log(event)
     event.preventDefault()
     const { key, keyCode } = event
     const block = document.querySelector(`.board_block[data-index='${attempts}${index}']`)
@@ -90,7 +90,7 @@ async function appStart() {
     event.preventDefault()
     const key = event.target.innerText
     const block = document.querySelector(`.board_block[data-index='${attempts}${index}']`)
-    const keyBlock = document.querySelector(`.key-block[data-keyboard ='${key}']`)
+    const keyBlock = document.querySelector(`.key-block[data-keyboard='${key}']`)
     if (key === 'x') handleBackspaceKey()
     if (key === keyBlock.innerText) {
       if (index === 5) {
