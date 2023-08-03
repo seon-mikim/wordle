@@ -1,26 +1,19 @@
-import randomId from './randomId.js'
-import { WordData } from './data.js'
-
-
-const minNum = 1
-const wordDataList = WordData.map((word) => word)
-const maxNum = wordDataList.length
-const id = randomId(minNum, maxNum)
-const matchWordDataId = wordDataList.filter((word) => word.id === id)
-const string = matchWordDataId[0].word.toUpperCase()
+import getAnswerWord from './getAnswerWord.js'
 
 let attempts = 0
 let index = 0
 let timer
-console.log(string)
 
-function appStart() {
+async function appStart() {
+  const getAnswer = await getAnswerWord()
+  const answerWord = getAnswer[0]
+
   /**종료시 모달창 나오는 함수 */
   const displayGameover = () => {
     const divCreateEl = document.createElement('div')
     divCreateEl.innerText = '게임이 종료 되었습니다.'
     divCreateEl.style =
-    'display:flex; justify-content:center; align-items:center; position:absolute; top: 35%; left: 45%; background-color: white; width: 200px; height: 150px;'
+      'display:flex; justify-content:center; align-items:center; position:absolute; top: 35%; left: 45%; background-color: white; width: 200px; height: 150px;'
     document.body.appendChild(divCreateEl)
   }
   /**게임 종료 함수 */
@@ -28,7 +21,6 @@ function appStart() {
     window.removeEventListener('keydown', handleKeydown)
     displayGameover()
     clearInterval(timer)
-   
   }
   /**엔터를 누를 시 다음 줄로 넘어가는 함수*/
   const nextLine = () => {
@@ -50,14 +42,13 @@ function appStart() {
     for (let i = 0; i < 5; i++) {
       const block = document.querySelector(`.board_block[data-index='${attempts}${i}']`)
       const letter = block.innerText
-      const answer = string[i]
+      const answer = answerWord[i]
       const keyBlock = document.querySelector(`.key-block[data-keyboard='${letter}']`)
       if (letter === answer) {
         hitNumber += 1
         block.style.background = '#6AAA64'
         keyBlock.style.background = '#6AAA64'
-      } else if (string.includes(letter)) {
-        console.log(letter)
+      } else if (answerWord.includes(letter)) {
         block.style.background = '#C9B458'
         keyBlock.style.background = '#C9B458'
       } else {
@@ -75,13 +66,11 @@ function appStart() {
     event.preventDefault()
     const { key, keyCode } = event
     const block = document.querySelector(`.board_block[data-index='${attempts}${index}']`)
-    console.log(block)
-    console.log(index)
     if (key === 'Backspace') handleBackspaceKey()
     else if (index === 5) {
       if (key === 'Enter') handleEnterKey()
       else return
-    } else if (65 <= keyCode && keyCode <= 90 )  {
+    } else if (65 <= keyCode && keyCode <= 90) {
       block.innerText = key.toUpperCase()
       index += 1
     }
@@ -92,7 +81,6 @@ function appStart() {
     const block = document.querySelector(`.board_block[data-index='${attempts}${index}']`)
     const keyBlock = document.querySelector(`.key-block[data-keyboard ='${key}']`)
     if (key === 'x') handleBackspaceKey()
-    console.log(keyBlock)
     if (key === keyBlock.innerText) {
       if (index === 5) {
         if (key === 'Enter') handleEnterKey()
@@ -104,7 +92,7 @@ function appStart() {
       }
     }
   }
-  
+
   /**게임 시작시 시간 경과 시간을 나타내는 함수 */
   const startTimer = () => {
     const startTime = new Date()
@@ -118,12 +106,10 @@ function appStart() {
     }
     timer = setInterval(setTime, 1000)
   }
-  
+
   startTimer()
-  window.addEventListener('keydown',(event)=> handleKeydown(event))
+  window.addEventListener('keydown', (event) => handleKeydown(event))
   window.addEventListener('click', (event) => handleClick(event))
 }
 
-
 appStart()
-
