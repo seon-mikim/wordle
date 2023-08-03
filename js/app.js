@@ -7,7 +7,14 @@ let timer
 async function appStart() {
   const getAnswer = await getAnswerWord()
   const answerWord = getAnswer[0]
+  console.log(answerWord)
 
+  // const handleNotMatchAnswerWord = (rowIndex) => {
+
+  //   const guessWordRow = document.querySelector(`.board-row .row-${rowIndex}`)
+  //   guessWordRow.classList.add('not_match_answer')
+  //   if(rowIndex !== attempts) guessWordRow.classList.remove('not_match_answer')
+  // }
   /**종료시 모달창 나오는 함수 */
   const displayGameover = () => {
     const divCreateEl = document.createElement('div')
@@ -42,7 +49,8 @@ async function appStart() {
     for (let i = 0; i < 5; i++) {
       const block = document.querySelector(`.board_block[data-index='${attempts}${i}']`)
       const letter = block.innerText
-      const answer = answerWord[i]
+      const answer = answerWord[i].toUpperCase()
+      console.log(answer)
       const keyBlock = document.querySelector(`.key-block[data-keyboard='${letter}']`)
       if (letter === answer) {
         hitNumber += 1
@@ -60,6 +68,8 @@ async function appStart() {
     }
     if (hitNumber === 5) gameover()
     else nextLine()
+    // if(hitNumber <4) return handleNotMatchAnswerWord(attempts)
+      
   }
   /**키 누를 시 해당 조건에 맞는 동작하게 하는 함수 */
   const handleKeydown = (event) => {
