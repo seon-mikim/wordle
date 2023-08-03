@@ -89,9 +89,10 @@ function appStart() {
   const handleClick = (event) => {
     event.preventDefault()
     const key = event.target.innerText
-    const block = document.querySelector(`.board_block [data-index='${attempts}${index}']`)
-    const keyBlock = document.querySelector(`.key-block [data-keyboard ='${key}']`)
+    const block = document.querySelector(`.board_block[data-index='${attempts}${index}']`)
+    const keyBlock = document.querySelector(`.key-block[data-keyboard ='${key}']`)
     if (key === 'x') handleBackspaceKey()
+    console.log(keyBlock)
     if (key === keyBlock.innerText) {
       if (index === 5) {
         if (key === 'Enter') handleEnterKey()
