@@ -73,9 +73,9 @@ async function appStart() {
   }
   /**키 누를 시 해당 조건에 맞는 동작하게 하는 함수 */
   const handleKeydown = (event) => {
-    console.log(event)
     event.preventDefault()
     const { key, keyCode } = event
+    
     const block = document.querySelector(`.board_block[data-index='${attempts}${index}']`)
     if (key === 'Backspace') handleBackspaceKey()
     else if (index === 5) {
@@ -86,8 +86,11 @@ async function appStart() {
       index += 1
     }
   }
+
+  
   const handleClick = (event) => {
-    event.preventDefault()
+    // event.preventDefault()
+    //  console.log(event)
     const key = event.target.innerText
     const block = document.querySelector(`.board_block[data-index='${attempts}${index}']`)
     const keyBlock = document.querySelector(`.key-block[data-keyboard='${key}']`)
